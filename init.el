@@ -18,17 +18,20 @@
 (add-to-list 'load-path "~/.emacs.d/vendor")
 (progn (cd "~/.emacs.d/vendor")
        (normal-top-level-add-subdirs-to-load-path))
-;; sometimes I want to keep other systemlike libraries in another path
-;; this (frankly) is for windows and pymacs.
+;; sometimes I want to keep other systemlike libraries in another path. 
+;; I also keep any machine-specific environment here.
 (when 
     (file-accessible-directory-p "~/.emacs.site.d")
   (add-to-list 'load-path "~/.emacs.site.d")
   (cd "~/.emacs.site.d")
-  (normal-top-level-add-subdirs-to-load-path))
+  (normal-top-level-add-subdirs-to-load-path)
+  ;; Add any necessary machine-specific environment.  See
+  ;; 'custom-env-eg.el' in this directory for example
+  (if (file-exists-p "custom-env.el")
+      (load-library "custom-env.el"))
+)
 ;; But I want to start in my own home directory
 (cd "~")
-;; Add necessary paths for Darwin
-(load-library "osx-path.el")
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;ELPA package manager
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
