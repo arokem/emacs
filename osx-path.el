@@ -3,7 +3,7 @@
 (when (string-equal system-type "darwin")
   (progn
     ;; am on mac
-    (setenv "PYTHONPATH" "~/sp")
+    (setenv "PYTHONPATH" (concat (getenv "HOME") "/sp"))
     (setq exec-path
           (append
 	   '("~/usr/local/bin")
